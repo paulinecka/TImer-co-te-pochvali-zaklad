@@ -9,14 +9,17 @@ function cisloUzivatele() {
   console.log(input);
 }
 
-const countDown = new Date().getTime() + 62000;
+const beziciCas = null;
 
 btnStartTime.addEventListener('click', () => {
-  setInterval(myTimer, 1000);
+  const countDown = Date.now() + 62000;
+  beziciCas = setInterval(() => {
+    myTimer(countDown);
+  }, 1000);
 });
 
-function myTimer() {
-  const now = new Date().getTime();
+function myTimer(countDown) {
+  const now = Date.now();
   const distance = countDown - now;
 
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -27,7 +30,7 @@ function myTimer() {
   ).innerHTML = `Zbývá času: ${minutes}m ${seconds}s`;
 
   if (distance <= 0) {
-    clearInterval(myTimer);
+    clearInterval(beziciCas);
     document.querySelector('#odpocet').innerHTML =
       'Ukončeno - čas na přestávku';
   }
@@ -35,6 +38,7 @@ function myTimer() {
 
 //console.log((Date.now() % (1000 * 60 * 60)) / (1000 * 60));
 //console.log(Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)));
+//new Date().getTime();
 
 /*
 const timer = setInterval(function () {
